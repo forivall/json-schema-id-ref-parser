@@ -1,16 +1,16 @@
 {
-  "name": "$NAME",
+  "name": "json-schema-id-ref-parser",
   "version": "0.0.0",
-  "description": "$DESCRIPTION",
+  "description": "Resolves and dereferences  pointers to schemas with an \"id\" property",
   "license": "ISC",
   "author": "Jordan Klassen <forivall@gmail.com>",
-  "homepage": "https://github.com/forivall/$NAME",
+  "homepage": "https://github.com/forivall/json-schema-id-ref-parser",
   "repository": {
     "type": "git",
-    "url": "git@github.com:forivall/$NAME.git"
+    "url": "git@github.com:forivall/json-schema-id-ref-parser.git"
   },
   "bugs": {
-    "url": "https://github.com/forivall/$NAME/issues"
+    "url": "https://github.com/forivall/json-schema-id-ref-parser/issues"
   },
   "scripts": {
     "lint": "xo",

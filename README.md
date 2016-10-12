@@ -1,15 +1,15 @@
-# $NAME
+# json-schema-id-ref-parser
 
-$DESCRIPTION
+Resolves and dereferences  pointers to schemas with an "id" property
 
-[![build status](https://secure.travis-ci.org/forivall/$NAME.svg)](http://travis-ci.org/forivall/$NAME)
-[![dependency status](https://david-dm.org/forivall/$NAME.svg)](https://david-dm.org/forivall/$NAME)
-[![coverage status](https://coveralls.io/repos/github/forivall/$NAME/badge.svg)](https://coveralls.io/github/forivall/$NAME)
+[![build status](https://secure.travis-ci.org/forivall/json-schema-id-ref-parser.svg)](http://travis-ci.org/forivall/json-schema-id-ref-parser)
+[![dependency status](https://david-dm.org/forivall/json-schema-id-ref-parser.svg)](https://david-dm.org/forivall/json-schema-id-ref-parser)
+[![coverage status](https://coveralls.io/repos/github/forivall/json-schema-id-ref-parser/badge.svg)](https://coveralls.io/github/forivall/json-schema-id-ref-parser)
 
 ## Installation
 
 ```
-npm install --save $NAME
+npm install --save json-schema-id-ref-parser
 ```
 
 ## Usage

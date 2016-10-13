@@ -20,14 +20,16 @@ var idRefParser = require('json-schema-id-ref-parser');
 
 module.exports = loadRaml;
 function loadRaml(filename, options) {
-  var raml = ramlParser.loadApiSync(filename, options);
-  var ramlJson = raml.toJSON();
-
-  return idRefParser.dereference(ramlJson.schemas)
-  .then(idRefParser.stringifySchemas)
-  .then((schemas) => {
-    ramlJson.schemas = schemas;
-    return ramlJson;
+  return ramlParser.loadApi(filename, options)
+  .then((raml) => {
+    var ramlJson = raml.toJSON();
+    return idRefParser.dereference(ramlJson.schemas)
+    .then(idRefParser.stringifySchemas)
+    .then((schemas) => {
+      ramlJson.schemas = schemas;
+      return ramlJson;
+    })
+    ;
   })
   ;
 }

@@ -1,0 +1,76 @@
+#%RAML 0.8
+title: XKCD
+baseUri: http://xkcd.com
+schemas:
+  - comic: |
+      {
+        "id": "comic",
+        "$schema" : "http://json-schema.org/draft-04/schema#",
+        "type" : "object",
+        "properties" : {
+          "month" : {
+            "type" : "string"
+          },
+          "num" : {
+            "type" : "number"
+          },
+          "link" : {
+            "type" : "string"
+          },
+          "year" : {
+            "type" : "string"
+          },
+          "news" : {
+            "type" : "string"
+          },
+          "safe_title" : {
+            "type" : "string"
+          },
+          "transcript" : {
+            "type" : "string"
+          },
+          "alt" : {
+            "type" : "string"
+          },
+          "img" : {
+            "type" : "string"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "day" : {
+            "type" : "string"
+          }
+        },
+        "required": ["num", "link", "title", "safe_title", "alt", "img"]
+      }
+  - comics: |
+      {
+        "id": "comics",
+        "$schema" : "http://json-schema.org/draft-04/schema#",
+        "type": "array",
+        "items": {
+          "$ref": "comic"
+        }
+      }
+/{comicId}/info.0.json:
+  uriParameters:
+    comicId:
+      type: number
+  get:
+    description: |
+      Fetch comics and metadata  by comic id.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: comic
+/info.0.json:
+  get:
+    description: |
+      Fetch current comic and metadata.
+    responses:
+      200:
+        body:
+          application/json:
+            schema: comic

@@ -117,3 +117,14 @@ function stringifySchema(schema) {
   }
   return stringifiedSchema;
 }
+
+module.exports.fixRaml = fixRaml;
+function fixRaml(raml) {
+  if (typeof raml.toJSON === 'function') raml = raml.toJSON();
+  return dereference(raml.schemas)
+  .then(stringifySchemas)
+  .then(function (schemas) {
+    raml.schemas = schemas;
+    return raml;
+  });
+}

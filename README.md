@@ -14,6 +14,25 @@ npm install --save json-schema-id-ref-parser
 
 ## Usage
 
+```js
+var ramlParser = require('raml-1-parser');
+var idRefParser = require('json-schema-id-ref-parser');
+
+module.exports = loadRaml;
+function loadRaml(filename, options) {
+  var raml = ramlParser.loadApiSync(filename, options);
+  var ramlJson = raml.toJSON();
+
+  return idRefParser.dereference(ramlJson.schemas)
+  .then(idRefParser.stringifySchemas)
+  .then((schemas) => {
+    ramlJson.schemas = schemas;
+    return ramlJson;
+  })
+  ;
+}
+```
+
 ## Credits
 [Jordan Klassen](https://github.com/forivall/)
 

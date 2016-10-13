@@ -20,6 +20,14 @@ module.exports.dereference = function (schemas, callback) {
 };
 
 function dereference(schemas) {
+  var schemaParts = explode(schemas);
+
+  return refake(schemaParts.list)
+  .then(_dereference.bind(null, schemaParts));
+}
+
+module.exports.explode = explode;
+function explode(schemas) {
   var schemaMap = {};
   var schemaList = [];
   var parsedSchemas = schemas.map(function (schema) {
@@ -44,43 +52,56 @@ function dereference(schemas) {
     }
     return parsedSchema;
   });
+  return {
+    parsed: parsedSchemas,
+    map: schemaMap,
+    list: schemaList
+  };
+}
 
+module.exports.refake = refake;
+function refake(schemaList) {
   return new Promise(function (resolve, reject) {
     refaker({schemas: schemaList}, function (err, refs) {
       if (err) return reject(err);
       resolve(refs);
     });
-  })
-  .then(function (refs) {
-    var cwd = process.cwd();
-    var idResolver = createIdResolver(schemaMap, cwd);
-
-    // TODO: flatten this
-    return Promise.all(parsedSchemas.map(function (schema) {
-      return Promise.all(Object.keys(schema).map(function (schemaKey) {
-        var parser = new $RefParser();
-        Object.keys(refs).forEach(function (ref) {
-          var local = path.join(cwd, refs[ref].id);
-          parser.$refs._add(ref, refs[ref]);
-          parser.$refs._add(local, refs[ref]);
-        });
-
-        var schemaBody = schema[schemaKey];
-        return parser.bundle(schemaBody, {resolve: {mem: idResolver}})
-        .then(function (bundledSchemaBody) {
-          return [schemaKey, bundledSchemaBody];
-        })
-        ;
-      })).then(function (schemaEntries) {
-        var schema = {};
-        for (var i = 0; i < schemaEntries.length; i++) {
-          var entry = schemaEntries[i];
-          schema[entry[0]] = entry[1];
-        }
-        return schema;
-      });
-    }));
   });
+}
+
+module.exports._dereference = _dereference;
+function _dereference(schemaParts, refs) {
+  var schemaMap = schemaParts.map;
+  var parsedSchemas = schemaParts.parsed;
+
+  var cwd = process.cwd();
+  var idResolver = createIdResolver(schemaMap, cwd);
+
+  // TODO: flatten this
+  return Promise.all(parsedSchemas.map(function (schema) {
+    return Promise.all(Object.keys(schema).map(function (schemaKey) {
+      var parser = new $RefParser();
+      Object.keys(refs).forEach(function (ref) {
+        var local = path.join(cwd, refs[ref].id);
+        parser.$refs._add(ref, refs[ref]);
+        parser.$refs._add(local, refs[ref]);
+      });
+
+      var schemaBody = schema[schemaKey];
+      return parser.bundle(schemaBody, {resolve: {mem: idResolver}})
+      .then(function (bundledSchemaBody) {
+        return [schemaKey, bundledSchemaBody];
+      })
+      ;
+    })).then(function (schemaEntries) {
+      var schema = {};
+      for (var i = 0; i < schemaEntries.length; i++) {
+        var entry = schemaEntries[i];
+        schema[entry[0]] = entry[1];
+      }
+      return schema;
+    });
+  }));
 }
 
 function createIdResolver(ids, cwd) {

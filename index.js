@@ -142,6 +142,8 @@ function stringifySchema(schema) {
 module.exports.fixRaml = fixRaml;
 function fixRaml(raml) {
   if (typeof raml.toJSON === 'function') raml = raml.toJSON();
+  if (raml.schemas == null) return raml;
+
   return dereference(raml.schemas)
   .then(stringifySchemas)
   .then(function (schemas) {

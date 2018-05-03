@@ -2,7 +2,7 @@ import path from 'path'
 
 import test from 'ava'
 
-import ramlParser from 'raml-1-parser'
+import * as ramlParser from 'raml-1-parser'
 
 import index from './index'
 
@@ -32,4 +32,10 @@ test('fixRaml', async (t) => {
   const raml = await ramlParser.loadApi(path.join(__dirname, 'fixtures/xkcd.raml'))
   const schemas = (await fixRaml(raml)).schemas
   t.deepEqual(JSON.parse(schemas[1].comics).items, JSON.parse(schemas[0].comic))
+})
+
+test('fixRaml when there are no schemas', async (t) => {
+  const raml = await ramlParser.loadApi(path.join(__dirname, 'fixtures/xkcd-no-schemas.raml'))
+  const schemas = (await fixRaml(raml)).schemas
+  t.is(schemas, undefined)
 })

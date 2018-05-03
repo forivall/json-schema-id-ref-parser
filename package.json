@@ -3,7 +3,7 @@
   "version": "0.3.0",
   "description": "Resolves and dereferences  pointers to schemas with an \"id\" property",
   "license": "ISC",
-  "author": "Jordan Klassen <forivall@gmail.com>",
+  "author": "Emily Marigold Klassen <forivall@gmail.com>",
   "homepage": "https://github.com/forivall/json-schema-id-ref-parser",
   "repository": {
     "type": "git",

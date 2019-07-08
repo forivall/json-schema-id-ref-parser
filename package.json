@@ -1,6 +1,6 @@
 {
   "name": "json-schema-id-ref-parser",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Resolves and dereferences  pointers to schemas with an \"id\" property",
   "keywords": [],
   "homepage": "https://github.com/forivall/json-schema-id-ref-parser",

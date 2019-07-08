@@ -41,8 +41,8 @@
   "peerDependencies": {},
   "bundledDependencies": [],
   "engines": {
-    "node": ">=4",
-    "npm": ">=2"
+    "node": ">=6",
+    "npm": ">=3"
   },
   "publishConfig": {
     "registry": "http://registry.npmjs.org"

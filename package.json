@@ -2,39 +2,33 @@
   "name": "json-schema-id-ref-parser",
   "version": "0.3.2",
   "description": "Resolves and dereferences  pointers to schemas with an \"id\" property",
-  "license": "ISC",
-  "author": "Emily Marigold Klassen <forivall@gmail.com>",
+  "keywords": [],
   "homepage": "https://github.com/forivall/json-schema-id-ref-parser",
+  "bugs": {
+    "url": "https://github.com/forivall/json-schema-id-ref-parser/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:forivall/json-schema-id-ref-parser.git"
   },
-  "bugs": {
-    "url": "https://github.com/forivall/json-schema-id-ref-parser/issues"
-  },
+  "license": "ISC",
+  "author": "Emily Marigold Klassen <forivall@gmail.com>",
   "scripts": {
+    "inspect": "jsinspect",
     "lint": "xo",
     "lint-staged": "lint-staged",
-    "inspect": "jsinspect",
     "test": "ava",
     "posttest": "npm run lint && npm run inspect",
-    "test-cov": "nyc ava",
-    "posttest-cov": "npm run posttest",
     "test-ci": "npm run test-cov",
-    "posttest-ci": "nyc report --reporter=text-lcov | coveralls"
-  },
-  "keywords": [],
-  "publishConfig": {
-    "registry": "http://registry.npmjs.org"
+    "posttest-ci": "nyc report --reporter=text-lcov | coveralls",
+    "test-cov": "nyc ava",
+    "posttest-cov": "npm run posttest"
   },
   "dependencies": {
-    "any-promise": "^1.3.0",
     "call-me-maybe": "^1.0.1",
     "json-schema-ref-parser": "^3.1.2",
     "refaker-local-id": "^0.1.0"
   },
-  "bundledDependencies": [],
-  "peerDependencies": {},
   "devDependencies": {
     "ava": "^0.16.0",
     "coveralls": "^2.11.14",
@@ -43,6 +37,15 @@
     "nyc": "^8.3.1",
     "raml-1-parser": "^1.1.5",
     "xo": "^0.17.0"
+  },
+  "peerDependencies": {},
+  "bundledDependencies": [],
+  "engines": {
+    "node": ">=4",
+    "npm": ">=2"
+  },
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org"
   },
   "xo": {
     "extends": [

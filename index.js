@@ -2,7 +2,6 @@
 var path = require('path');
 var url = require('url');
 
-var Promise = require('any-promise');
 var refaker = require('refaker-local-id');
 
 var $RefParser = require('json-schema-ref-parser');

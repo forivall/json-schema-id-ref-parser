@@ -30,7 +30,7 @@
     "refaker-local-id": "^0.1.0"
   },
   "devDependencies": {
-    "ava": "^0.16.0",
+    "ava": "^5.1.0",
     "coveralls": "^2.11.14",
     "eslint-config-mxo": "^0.4.0",
     "jsinspect": "^0.8.0",
